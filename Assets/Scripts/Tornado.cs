@@ -8,9 +8,15 @@ public class Tornado : MonoBehaviour
     public TornadoRing ringPrefab;
     public int ringCount;
 
+    [Header("Tornado Values")]
+    public float strength; 
+
     // Start is called before the first frame update
     void Start()
     {
+
+        strength = 1.0f;
+
         for(int i = 0; i < ringCount; i++)
         {
             var height = (i + 1) / (float)ringCount;
