@@ -69,17 +69,14 @@ public class TornadoForce : MonoBehaviour
 
         // Handle lifting
         lifted.Value = timeHitGround > Time.time - groundCheckTime || !grounded;
-        print($"grounded = {grounded}; {name}");
 
         if(lifted.Rising)
         {
             tornado.ObjectContributions += strengthContribution;
-            Debug.Log("!!!!" + name);
         }
         else if(lifted.Falling)
         {
             tornado.ObjectContributions -= strengthContribution;
-            Debug.Log("uh oh" + name);
         }
     }
 
