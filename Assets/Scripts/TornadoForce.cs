@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TornadoForce : MonoBehaviour
 {
+    public float strengthContribution = 1;
 
     [Header("Force Constants")]
     private float strengthToForceRatio;
@@ -12,6 +14,7 @@ public class TornadoForce : MonoBehaviour
     private float perpendicularForceMultiplier;
     private float distanceFalloffPower;
     private float perpendicularDistanceFalloffPower;
+    private float groundCheckTime;
 
     [Header("Tornado")]
     private Tornado tornado;
@@ -19,10 +22,15 @@ public class TornadoForce : MonoBehaviour
     [Header("Componenets")]
     private Rigidbody rb;
 
+    bool grounded;
+    float timeHitGround;
+    TrackedCondition lifted;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
         tornado = FindAnyObjectByType<Tornado>();
         strengthToForceRatio = tornado.strengthToForceRatio;
         maxPullDistance = tornado.maxPullDistance;
@@ -30,6 +38,9 @@ public class TornadoForce : MonoBehaviour
         perpendicularForceMultiplier = tornado.perpendicularForceMultiplier;
         distanceFalloffPower = tornado.distanceFalloffPower;
         perpendicularDistanceFalloffPower = tornado.distanceFalloffPower;
+        groundCheckTime = tornado.groundCheckTime;
+
+        timeHitGround = Time.time - groundCheckTime;
     }
 
     private void FixedUpdate()
@@ -53,9 +64,41 @@ public class TornadoForce : MonoBehaviour
             float perpendicularMagnitude = ((tornado.strength * strengthToForceRatio) / Mathf.Pow(distance, perpendicularDistanceFalloffPower)) * perpendicularForceMultiplier;
             if (perpendicularMagnitude > maxPullForce) perpendicularMagnitude = maxPullForce;
             rb.AddForce(perpendicularDirection * perpendicularMagnitude);
-        } 
+        }
+
+        // Handle lifting
+        lifted.Value = timeHitGround > Time.time - groundCheckTime || !grounded;
+        print($"grounded = {grounded}; {name}");
+
+        if(lifted.Rising)
+        {
+            tornado.ObjectContributions += strengthContribution;
+            Debug.Log("!!!!" + name);
+        }
+        else if(lifted.Falling)
+        {
+            tornado.ObjectContributions -= strengthContribution;
+            Debug.Log("uh oh" + name);
+        }
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == Layers.Ground)
+        {
+            timeHitGround = Time.time;
+            grounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == Layers.Ground)
+        {
+            grounded = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

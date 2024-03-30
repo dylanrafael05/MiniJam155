@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Tornado))]
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public float zoomDrag;
 
     Rigidbody body;
+    Tornado nado;
+
     Vector3 cameraOffset;
     Quaternion cameraRotation;
     float angle;
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        nado = GetComponent<Tornado>();
         body = GetComponent<Rigidbody>();
         cameraOffset = camera.transform.position - transform.position;
         cameraRotation = camera.transform.rotation;
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviour
         // Rotate camera
         var quat = Quaternion.AngleAxis(angle, Vector3.up);
         camera.transform.SetPositionAndRotation(
-            transform.position + quat * cameraOffset, 
+            transform.position + quat * cameraOffset * nado.strength, 
             quat * cameraRotation
         );
     }

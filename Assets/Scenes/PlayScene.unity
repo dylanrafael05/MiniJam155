@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 1955644262}
   - component: {fileID: 1955644261}
   - component: {fileID: 1955644260}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,6 +687,8 @@ MonoBehaviour:
   ringPrefab: {fileID: 5378570250064378250, guid: 92f4d79aad6c101458995a051f0ad325, type: 3}
   ringCount: 8
   strength: 1
+  strengthLoss: 0.01
+  groundCheckTime: 0.5
   strengthToForceRatio: 2000
   maxPullDistance: 100
   maxPullForce: 200
