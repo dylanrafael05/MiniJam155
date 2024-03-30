@@ -45,7 +45,7 @@ public class TornadoForce : MonoBehaviour
             float magnitude = (tornado.strength * strengthToForceRatio) / Mathf.Pow(distance, distanceFalloffPower);
             if (magnitude > maxPullForce) magnitude = maxPullForce;
             rb.AddForce(direction * magnitude);
-            print(direction * magnitude);
+            // print(direction * magnitude);
 
             Vector2 perpendicularDirection2D = Vector2.Perpendicular((tornadoPosition2D - position2D).normalized);
             Vector3 perpendicularDirection = new Vector3(perpendicularDirection2D.x, 0, perpendicularDirection2D.y);
