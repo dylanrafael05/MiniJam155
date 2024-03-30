@@ -9,7 +9,15 @@ public class Tornado : MonoBehaviour
     public int ringCount;
 
     [Header("Tornado Values")]
-    public float strength; 
+    public float strength;
+
+    [Header("Force Constants")]
+    public float strengthToForceRatio;
+    public float maxPullDistance;
+    public float maxPullForce;
+    public float perpendicularForceMultiplier;
+    public float distanceFalloffPower;
+    public float perpendicularDistanceFalloffPower;
 
     // Start is called before the first frame update
     void Start()
