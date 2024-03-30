@@ -714,7 +714,7 @@ MonoBehaviour:
   rotationDeadband: 0
   minZoom: 10
   maxZoom: 100
-  zoomSpeed: 5
+  zoomSpeed: 20
   zoomDrag: 0.1
 --- !u!54 &7035816138903386717
 Rigidbody:

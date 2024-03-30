@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class WalkCycle : MonoBehaviour
 {
-
-    private const int iMax = 120;
+    private const float CycleTime = 0.8f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,22 +24,23 @@ public class WalkCycle : MonoBehaviour
 
     IEnumerator DoWalkCycle()
     {
+        var dir = 1;
         while (true)
-        {   
-            for (int i = 0; i < iMax; i++)
+        {
+            var start = Time.time;
+            while (Time.time - CycleTime < start)
             {
-                transform.localEulerAngles = new Vector3(0, Mathf.Lerp(-45, 45, (float)i / iMax), 0);
-                if (i < iMax / 2) transform.localPosition = new Vector3(0, 0, Mathf.Lerp(0, 1f, (float)i / (iMax / 2)));
-                else transform.localPosition = new Vector3(0, 0, Mathf.Lerp(1f, 0, (float)(i - iMax / 2) / (iMax / 2)));
+                var p = Mathf.InverseLerp(start, start + CycleTime, Time.time);
+
+                transform.localEulerAngles = new Vector3(0, dir * Mathf.Lerp(-45, 45, 0.5f - Mathf.Cos(Mathf.PI * p) / 2), 0);
+
+                if (p < 0.5f) transform.localPosition = Vector3.forward * Mathf.Lerp(0, 1f, 4 * p - 4 * p * p);
+                else transform.localPosition = Vector3.forward * Mathf.Lerp(1f, 0, 4 * p * p - 4 * p + 1);
+
                 yield return null;
             }
-            for (int i = 0; i < iMax; i++)
-            {
-                transform.localEulerAngles = new Vector3(0, Mathf.Lerp(45, -45, (float)i / iMax), 0);
-                if (i < iMax / 2) transform.localPosition = new Vector3(0, 0, Mathf.Lerp(0, 1f, (float)i / (iMax / 2)));
-                else transform.localPosition = new Vector3(0, 0, Mathf.Lerp(1f, 0, (float)(i - iMax / 2) / (iMax / 2)));
-                yield return null;
-            }
+
+            dir *= -1;
         }
     }
 

@@ -12,8 +12,7 @@ public class TornadoRing : MonoBehaviour
 
     public void Start()
     {
-        var rotationSign = Random.Range(0, 2) * 2 - 1;
-        rotation = rotationSign * Random.Range(minRotation, maxRotation);
+        rotation = Random.Range(minRotation, maxRotation);
     }
 
     private void Update()
