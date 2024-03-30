@@ -183,12 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthToForceRatio: 2000
-  maxPullDistance: 100
-  maxPullForce: 200
-  perpendicularForceMultiplier: 0.25
-  distanceFalloffPower: 1.5
-  perpendicularDistanceFalloffPower: 5
 --- !u!65 &103951479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -308,12 +302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthToForceRatio: 2000
-  maxPullDistance: 100
-  maxPullForce: 200
-  perpendicularForceMultiplier: 0.25
-  distanceFalloffPower: 1.5
-  perpendicularDistanceFalloffPower: 5
 --- !u!65 &249331521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -779,12 +767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthToForceRatio: 2000
-  maxPullDistance: 100
-  maxPullForce: 200
-  perpendicularForceMultiplier: 0.25
-  distanceFalloffPower: 1.5
-  perpendicularDistanceFalloffPower: 5
 --- !u!65 &1959165439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -969,7 +951,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ringPrefab: {fileID: 5378570250064378250, guid: 92f4d79aad6c101458995a051f0ad325, type: 3}
   ringCount: 8
-  strength: 0
+  strength: 1
+  strengthToForceRatio: 2000
+  maxPullDistance: 100
+  maxPullForce: 200
+  perpendicularForceMultiplier: 0.1
+  distanceFalloffPower: 1.5
+  perpendicularDistanceFalloffPower: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

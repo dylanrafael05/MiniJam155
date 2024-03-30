@@ -6,12 +6,12 @@ public class TornadoForce : MonoBehaviour
 {
 
     [Header("Force Constants")]
-    public float strengthToForceRatio;
-    public float maxPullDistance;
-    public float maxPullForce;
-    public float perpendicularForceMultiplier;
-    public float distanceFalloffPower;
-    public float perpendicularDistanceFalloffPower;
+    private float strengthToForceRatio;
+    private float maxPullDistance;
+    private float maxPullForce;
+    private float perpendicularForceMultiplier;
+    private float distanceFalloffPower;
+    private float perpendicularDistanceFalloffPower;
 
     [Header("Tornado")]
     private Tornado tornado;
@@ -24,6 +24,12 @@ public class TornadoForce : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         tornado = FindAnyObjectByType<Tornado>();
+        strengthToForceRatio = tornado.strengthToForceRatio;
+        maxPullDistance = tornado.maxPullDistance;
+        maxPullForce = tornado.maxPullForce;
+        perpendicularForceMultiplier = tornado.perpendicularForceMultiplier;
+        distanceFalloffPower = tornado.distanceFalloffPower;
+        perpendicularDistanceFalloffPower = tornado.distanceFalloffPower;
     }
 
     private void FixedUpdate()
