@@ -6,6 +6,7 @@ using UnityEngine;
 public class TornadoForce : MonoBehaviour
 {
     public float strengthContribution = 1;
+    public string itemName = "No Name";
 
     [Header("Force Constants")]
     private float strengthToForceRatio;

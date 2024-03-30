@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             var dir = Input.GetKey(KeyCode.S) ? -1 : 1;
             var axis = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
 
-            body.AddForce(dir * moveSpeed * axis);
+            body.AddForce(dir * moveSpeed * nado.strength * axis);
 
             moving = true;
         }
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
             var dir = Input.GetKey(KeyCode.A) ? -1 : 1;
             var axis = Quaternion.AngleAxis(angle + 90, Vector3.up) * Vector3.forward;
 
-            body.AddForce(dir * moveSpeed * axis);
+            body.AddForce(dir * moveSpeed * nado.strength * axis);
 
             moving = true;
         }
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
         // Clamp movement speed
         var currentSpeed = body.velocity.magnitude;
-        if (currentSpeed > maxMoveSpeed)
+        if (currentSpeed > maxMoveSpeed * nado.strength)
         {
             body.velocity *= maxMoveSpeed / currentSpeed;
         }

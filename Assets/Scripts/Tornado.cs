@@ -1,12 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tornado : MonoBehaviour
 {
+    [Serializable]
+    public struct StrengthBarLevel
+    {
+        public float maximumValue;
+        public Color barColor;
+    }
+
     [Header("Visuals")]
     public TornadoRing ringPrefab;
     public int ringCount;
+    public UIBar strengthBar;
+    public StrengthBarLevel[] barLevels;
 
     [Header("Tornado Values")]
     public float strength;
@@ -67,5 +77,26 @@ public class Tornado : MonoBehaviour
         );
 
         PenaltyContributions += Time.deltaTime * strengthLoss;
+
+        // Update strength UI
+        for(int i = 0; i < barLevels.Length; i++)
+        {
+            var currentLevel = barLevels[i];
+            if(currentLevel.maximumValue > strength)
+            {
+                strengthBar.FilledColor = currentLevel.barColor;
+                strengthBar.UnfilledColor = currentLevel.barColor * 0.5f;
+
+                var previousMax = i > 0 ? barLevels[i - 1].maximumValue : 0;
+
+                strengthBar.Fill = Mathf.InverseLerp(
+                    previousMax,
+                    currentLevel.maximumValue,
+                    strength
+                );
+
+                break;
+            }
+        }
     }
 }
