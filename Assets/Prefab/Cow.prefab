@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6637514219854934820}
   - component: {fileID: 267039664913953}
   - component: {fileID: 5879210868302787591}
+  - component: {fileID: 49401208979431074}
   m_Layer: 0
   m_Name: cow
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7858620530573866470}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.019459186, z: 0, w: 0.9998107}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.61, z: -0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -96,6 +97,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 033587d48ed1ade4ba8109b0daecda02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &49401208979431074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858620530573866470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848bba21dfa4c32429f68358c9dec6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaredOfTornado: 0
+  scareDistance: 0
+  groundOffset: 0.1
+  movementSpeed: 0.1
+  rotationSpeed: 1
+  turnSwitchChance: 0.005
+  dead: 0
 --- !u!1 &8848346491212550195
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strengthContribution: 1
+  itemName: No Name
 --- !u!136 &2104493174867978550
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -22,10 +22,11 @@ public class TornadoForce : MonoBehaviour
 
     [Header("Componenets")]
     private Rigidbody rb;
-
-    bool grounded;
+    
+    private bool grounded;
     float timeHitGround;
     TrackedCondition lifted;
+    public bool Grounded => grounded;
 
     // Start is called before the first frame update
     void Start()

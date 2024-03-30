@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class WalkCycle : MonoBehaviour
 {
+
+    private bool walking = false;
     private const float CycleTime = 0.8f;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartWalkCycle();
-    }
 
+    }
+    public bool Walking => walking;
     public void StartWalkCycle()
     {
+        walking = true;   
         StartCoroutine(DoWalkCycle());
     }
 
     public void EndWalkCycle()
     {
-        StopCoroutine(DoWalkCycle());
+        walking = false;
+        StopAllCoroutines();
     }
 
     IEnumerator DoWalkCycle()
