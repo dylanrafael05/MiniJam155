@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 267039664913953}
   - component: {fileID: 5879210868302787591}
   - component: {fileID: 49401208979431074}
+  - component: {fileID: 6410891714901221364}
   m_Layer: 0
   m_Name: cow
   m_TagString: Untagged
@@ -98,6 +99,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &49401208979431074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858620530573866470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848bba21dfa4c32429f68358c9dec6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaredOfTornado: 0
+  scareDistance: 0
+  groundOffset: 0.1
+  movementSpeed: 0.1
+  rotationSpeed: 1
+  turnSwitchChance: 0.005
+  dead: 0
+--- !u!114 &6410891714901221364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -30,8 +30,12 @@ public class Tornado : MonoBehaviour
     public float perpendicularForceMultiplier;
     public float distanceFalloffPower;
     public float perpendicularDistanceFalloffPower;
+    public float influenceRadius;
 
     private float targetStrength;
+    private Transform child;
+
+    public Rigidbody Rigidbody { get; private set; }
 
     public float BaseStrength { get; private set; }
     public float PenaltyContributions { get; set; }
@@ -41,16 +45,18 @@ public class Tornado : MonoBehaviour
     void Start()
     {
         BaseStrength = strength;
+        child = transform.GetChild(0);
+        Rigidbody = GetComponent<Rigidbody>();
 
-        for(int i = 0; i < ringCount; i++)
+        for (int i = 0; i < ringCount; i++)
         {
             var height = (i + 1) / (float)ringCount;
 
             var go = GameObject.Instantiate(
                 ringPrefab,
-                Vector3.up * height * transform.localScale.y * 10,
+                Vector3.up * (height * 10 - 5),
                 ringPrefab.transform.rotation,
-                transform
+                child
             );
 
             go.transform.localScale *= height * 2;
@@ -64,13 +70,13 @@ public class Tornado : MonoBehaviour
 
         strength = Mathf.Lerp(strength, targetStrength, 2 * Time.deltaTime);
 
-        transform.localPosition = new(
-            transform.localPosition.x,
+        child.position = new(
+            child.position.x,
             strength * 5,
-            transform.localPosition.z
+            child.position.z
         );
 
-        transform.localScale = new(
+        child.localScale = new(
             strength,
             strength,
             strength
