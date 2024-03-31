@@ -41,6 +41,8 @@ public class Tornado : MonoBehaviour
     public float PenaltyContributions { get; set; }
     public float ObjectContributions { get; set; }
 
+    public float EffectiveStrength => Mathf.Log(1 + strength) / Mathf.Log(2);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,14 +74,14 @@ public class Tornado : MonoBehaviour
 
         child.position = new(
             child.position.x,
-            strength * 5,
+            EffectiveStrength * 5,
             child.position.z
         );
 
         child.localScale = new(
-            strength,
-            strength,
-            strength
+            EffectiveStrength,
+            EffectiveStrength,
+            EffectiveStrength
         );
 
         PenaltyContributions += Time.deltaTime * strengthLoss;
