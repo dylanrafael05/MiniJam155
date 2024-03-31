@@ -14,6 +14,7 @@ public class Tornado : MonoBehaviour
 
     [Header("Visuals")]
     public TornadoRing ringPrefab;
+    public Explosion explosionPrefab;
     public int ringCount;
     public UIBar strengthBar;
     public StrengthBarLevel[] barLevels;
@@ -22,6 +23,7 @@ public class Tornado : MonoBehaviour
     public float strength;
     public float strengthLoss;
     public float groundCheckTime;
+    public float timeBeforeExplosion;
 
     [Header("Force Constants")]
     public float strengthToForceRatio;

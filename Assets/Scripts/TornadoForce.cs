@@ -17,9 +17,11 @@ public class TornadoForce : MonoBehaviour
     private float distanceFalloffPower;
     private float perpendicularDistanceFalloffPower;
     private float groundCheckTime;
+    private float timeBeforeExplosion;
 
     [Header("Tornado")]
     private Tornado tornado;
+    private Explosion explosion;
 
     [Header("Componenets")]
     private Rigidbody rb;
@@ -46,6 +48,8 @@ public class TornadoForce : MonoBehaviour
         distanceFalloffPower = tornado.distanceFalloffPower;
         perpendicularDistanceFalloffPower = tornado.distanceFalloffPower;
         groundCheckTime = tornado.groundCheckTime;
+        timeBeforeExplosion = tornado.timeBeforeExplosion;
+        explosion = tornado.explosionPrefab;
 
         timeHitGround = Time.time - groundCheckTime;
 
@@ -110,12 +114,24 @@ public class TornadoForce : MonoBehaviour
             spring.minDistance = 0;
             spring.maxDistance = 4;
             spring.damper = 0.5f;
+            StartCoroutine(Explode());
         }
         else if(lifted.Falling)
         {
             tornado.ObjectContributions -= strengthContribution;
             transform.SetParent(originalParent);
             Destroy(spring);
+        }
+    }
+
+    IEnumerator Explode()
+    {
+        yield return new WaitForSeconds(timeBeforeExplosion);
+        if (lifted.Value)
+        {
+            Instantiate(explosion).Setup(transform.position);
+            tornado.ObjectContributions -= strengthContribution;
+            Destroy(gameObject);
         }
     }
 

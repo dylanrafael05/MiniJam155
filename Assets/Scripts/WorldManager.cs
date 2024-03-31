@@ -127,7 +127,7 @@ public class WorldManager : MonoBehaviour
             if (math.distance(pos, townPos) < math.cmax(townSize))
                 continue;
 
-            var chance = noise.cnoise(pos + noiseOffset) * 2 - 1;
+            var chance = noise.cnoise(pos + noiseOffset);
             var roll = random.NextFloat();
 
             GameObject[] choices;
