@@ -189,6 +189,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 293032349b3b76a4081dc4575e76d358, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4199203800920105684}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 293032349b3b76a4081dc4575e76d358, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -787489280294447648}
   m_SourcePrefab: {fileID: 100100000, guid: 293032349b3b76a4081dc4575e76d358, type: 3}
 --- !u!1 &6242237270719280726 stripped
 GameObject:
@@ -257,6 +260,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.30002883, y: 0.27632195, z: 0.46606714}
   m_Center: {x: 0, y: 0.13770247, z: -0.015563242}
+--- !u!145 &-787489280294447648
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242237270719280726}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.27586344, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 0
+  m_Damper: 0
+  m_MinDistance: 0
+  m_MaxDistance: 4
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 0
 --- !u!4 &6767556831559380204 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 293032349b3b76a4081dc4575e76d358, type: 3}

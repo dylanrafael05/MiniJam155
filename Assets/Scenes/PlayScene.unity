@@ -704,19 +704,30 @@ MonoBehaviour:
   buildingSpacing: 12
   minObjects: 75
   maxObjects: 150
-  ground: {fileID: 5063901535567278280, guid: f8c8b04c9b406a14ab6589b28867730f, type: 3}
+  ground:
+    prefab: {fileID: 5063901535567278280, guid: f8c8b04c9b406a14ab6589b28867730f, type: 3}
+    verticalOffset: 0
   animals:
-  - {fileID: 8848346491212550195, guid: 76f1d90e2f418524d8b9fe285b599e42, type: 3}
-  - {fileID: 3472323633722921171, guid: 82945ba888acd5543a4e375e1eaa6899, type: 3}
+  - prefab: {fileID: 8848346491212550195, guid: 76f1d90e2f418524d8b9fe285b599e42, type: 3}
+    verticalOffset: 0
+  - prefab: {fileID: 3472323633722921171, guid: 82945ba888acd5543a4e375e1eaa6899, type: 3}
+    verticalOffset: 0
   trees:
-  - {fileID: 5726045333183058257, guid: cf11f645e8a3fb94fad8bca561e7f61c, type: 3}
-  - {fileID: 8707699113921921812, guid: bdb78ddcc7411b3439d9fd3b97993131, type: 3}
-  - {fileID: 1894526292702585149, guid: 69ee2e854095ac547b54490f7d06e287, type: 3}
+  - prefab: {fileID: 1894526292702585149, guid: 69ee2e854095ac547b54490f7d06e287, type: 3}
+    verticalOffset: 1
+  - prefab: {fileID: 8707699113921921812, guid: bdb78ddcc7411b3439d9fd3b97993131, type: 3}
+    verticalOffset: 2
+  - prefab: {fileID: 5726045333183058257, guid: cf11f645e8a3fb94fad8bca561e7f61c, type: 3}
+    verticalOffset: 3
   buildings:
-  - {fileID: 6189205770738673451, guid: b4f20fbc1750b7c45aeda5a722671f3d, type: 3}
-  - {fileID: 6242237270719280726, guid: 4dada62efbe1ad342a079fb430771f01, type: 3}
-  - {fileID: 5952251311424521820, guid: eb6659b1041d0e64f8db162ea261d9e5, type: 3}
-  - {fileID: 3671691219758668783, guid: 76554de15e197e2479bcc97d12aec00e, type: 3}
+  - prefab: {fileID: 6189205770738673451, guid: b4f20fbc1750b7c45aeda5a722671f3d, type: 3}
+    verticalOffset: 2
+  - prefab: {fileID: 6242237270719280726, guid: 4dada62efbe1ad342a079fb430771f01, type: 3}
+    verticalOffset: 2
+  - prefab: {fileID: 5952251311424521820, guid: eb6659b1041d0e64f8db162ea261d9e5, type: 3}
+    verticalOffset: 2
+  - prefab: {fileID: 3671691219758668783, guid: 76554de15e197e2479bcc97d12aec00e, type: 3}
+    verticalOffset: 2
 --- !u!4 &129879841967350432
 Transform:
   m_ObjectHideFlags: 0

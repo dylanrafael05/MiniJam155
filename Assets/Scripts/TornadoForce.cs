@@ -26,6 +26,7 @@ public class TornadoForce : MonoBehaviour
     private SpringJoint spring;
     
     private bool grounded;
+    private bool settled = false;
     float timeHitGround;
     TrackedCondition lifted;
     Transform originalParent;
@@ -47,14 +48,17 @@ public class TornadoForce : MonoBehaviour
         perpendicularDistanceFalloffPower = tornado.distanceFalloffPower;
         groundCheckTime = tornado.groundCheckTime;
 
-        timeHitGround = Time.time - groundCheckTime;
+        timeHitGround = Time.time - groundCheckTime * 2;
 
         lifted.Value = false;
+
+        spring = gameObject.GetComponent<SpringJoint>();
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        var maxPull = tornado.maxPullDistance * tornado.EffectiveStrength;
+        // Handle physics; this is in update instead of fixed update to reduce lag.
+        var maxPull = maxPullDistance * tornado.EffectiveStrength;
 
         if (math.distance(tornado.transform.position.x, transform.position.x) > maxPull
         || math.distance(tornado.transform.position.z, transform.position.z) > maxPull)
@@ -75,26 +79,24 @@ public class TornadoForce : MonoBehaviour
                 direction = direction.normalized;
                 float magnitude = (tornado.EffectiveStrength * strengthToForceRatio) / Mathf.Pow(distance, distanceFalloffPower);
                 if (magnitude > maxPullForce) magnitude = maxPullForce;
-                rb.AddForce(direction * magnitude);
-                // print(direction * magnitude);
+                rb.AddForce(direction * magnitude * Time.deltaTime / Time.fixedDeltaTime);
 
                 Vector2 perpendicularDirection2D = Vector2.Perpendicular((tornadoPosition2D - position2D).normalized);
                 Vector3 perpendicularDirection = new Vector3(perpendicularDirection2D.x, 0, perpendicularDirection2D.y);
                 perpendicularDirection *= -1;
                 float perpendicularMagnitude = ((tornado.EffectiveStrength * strengthToForceRatio) / Mathf.Pow(distance, perpendicularDistanceFalloffPower)) * perpendicularForceMultiplier;
                 if (perpendicularMagnitude > maxPullForce) perpendicularMagnitude = maxPullForce;
-                rb.AddForce(perpendicularDirection * perpendicularMagnitude);
+                rb.AddForce(perpendicularDirection * perpendicularMagnitude * Time.deltaTime / Time.fixedDeltaTime);
             }
         }
-    }
 
-    void Update()
-    {
+        spring.connectedAnchor = -Vector3.forward * (tornado.EffectiveStrength * 10 + 5);
+
         // Handle lifting
         var delta = transform.position - tornado.transform.position;
         delta -= Vector3.up * delta.y;
 
-        lifted.Value = (timeHitGround > Time.time - groundCheckTime || !grounded) 
+        lifted.Value = settled && (timeHitGround > Time.time - groundCheckTime || !grounded) 
                     && delta.magnitude < tornado.influenceRadius * tornado.EffectiveStrength;
 
         if(lifted.Rising)
@@ -102,20 +104,16 @@ public class TornadoForce : MonoBehaviour
             tornado.ObjectContributions += strengthContribution;
             transform.SetParent(tornado.transform);
 
-            spring = gameObject.AddComponent<SpringJoint>();
             spring.connectedBody = tornado.Rigidbody;
-            spring.connectedMassScale = 0;
-            spring.autoConfigureConnectedAnchor = false;
-            spring.connectedAnchor = -Vector3.forward * (tornado.EffectiveStrength * 10 + 5);
-            spring.minDistance = 0;
-            spring.maxDistance = 4;
-            spring.damper = 0.5f;
+            spring.spring = 1;
         }
         else if(lifted.Falling)
         {
             tornado.ObjectContributions -= strengthContribution;
             transform.SetParent(originalParent);
-            Destroy(spring);
+
+            spring.connectedBody = null;
+            spring.spring = 0;
         }
     }
 
@@ -125,6 +123,7 @@ public class TornadoForce : MonoBehaviour
         {
             timeHitGround = Time.time;
             grounded = true;
+            settled = true;
         }
     }
 

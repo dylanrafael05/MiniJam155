@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2209924557394725191}
   - component: {fileID: 2852092223352605100}
   - component: {fileID: 6354340074891536914}
+  - component: {fileID: 4201741115020797631}
   m_Layer: 0
   m_Name: TowerWindmill
   m_TagString: Untagged
@@ -154,3 +155,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strengthContribution: 20
   itemName: No Name
+--- !u!145 &4201741115020797631
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3671691219758668783}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 11.379702, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 0
+  m_Damper: 0
+  m_MinDistance: 0
+  m_MaxDistance: 4
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 0
