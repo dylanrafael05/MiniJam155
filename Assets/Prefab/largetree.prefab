@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 4917138354955914219}
   - component: {fileID: 7067371379798716512}
   - component: {fileID: 2073669156251093095}
+  - component: {fileID: 2984901307663882774}
   - component: {fileID: 8976024733976288744}
   m_Layer: 0
   m_Name: largetree
@@ -496,6 +497,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strengthContribution: 5
   itemName: No Name
+--- !u!145 &2984901307663882774
+SpringJoint:
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 0
+  m_Damper: 0
+  m_MinDistance: 0
+  m_MaxDistance: 4
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 0
 --- !u!65 &8976024733976288744
 BoxCollider:
   m_ObjectHideFlags: 0

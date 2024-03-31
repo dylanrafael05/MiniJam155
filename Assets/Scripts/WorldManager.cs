@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.NetworkInformation;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -9,6 +10,13 @@ using SeededRandom = Unity.Mathematics.Random;
 
 public class WorldManager : MonoBehaviour
 {
+    [Serializable]
+    public struct Spawnable
+    {
+        public GameObject prefab;
+        public float verticalOffset;
+    }
+
     private PlayerController player;
     private SeededRandom random;
     private uint seed;
@@ -26,16 +34,33 @@ public class WorldManager : MonoBehaviour
     public int maxObjects;
 
     [Header("Spawn Prefabs")]
-    public GameObject ground;
-    public GameObject[] animals;
-    public GameObject[] trees;
-    public GameObject[] buildings;
+    public Spawnable ground;
+    public Spawnable[] animals;
+    public Spawnable[] trees;
+    public Spawnable[] buildings;
 
     public Dictionary<int2, GameObject> GeneratedChunks = new();
     int2 oldPlayerChunk;
 
+    public void SetupPrefab(GameObject gameObject)
+    {
+        var spring = gameObject.GetComponent<SpringJoint>();
+
+        spring.connectedBody = null;
+        spring.connectedMassScale = 0;
+        spring.autoConfigureConnectedAnchor = false;
+        spring.minDistance = 0;
+        spring.maxDistance = 4;
+        spring.spring = 0;
+        spring.damper = 0;
+    }
+
+    int activeGenerations = 0;
+
     public IEnumerator GenerateChunk(int2 chunk)
     {
+        activeGenerations++;
+
         // Setup container and random state
         var time = Time.realtimeSinceStartup;
         random = new(seed + (uint)chunk.x + (uint)chunk.y);
@@ -49,15 +74,16 @@ public class WorldManager : MonoBehaviour
         var center = chunk * chunkSize;
         var center3d = math.float3(center.x, 0, center.y);
 
-        void Spawn(GameObject prefab, Vector3 pos, Quaternion rot)
+        void Spawn(Spawnable prefab, Vector3 pos, Quaternion rot)
         {
-            var go = GameObject.Instantiate(prefab, pos, rot, container.transform);
+            GameObject.Instantiate(prefab.prefab, pos + Vector3.up * prefab.verticalOffset, rot, container.transform);
         }
 
         bool ShouldBreak()
         {
-            const float MAX_TIME = 1f / 1000;
-            return time < Time.realtimeSinceStartup - MAX_TIME;
+            const float MAX_TIME = 8f / 1000;
+
+            return time < Time.realtimeSinceStartup - MAX_TIME / activeGenerations;
         }
 
         void UpdateBreak()
@@ -65,7 +91,7 @@ public class WorldManager : MonoBehaviour
             time = Time.realtimeSinceStartup;
         }
 
-        Spawn(ground, center3d, ground.transform.rotation);
+        Spawn(ground, center3d, ground.prefab.transform.rotation);
 
         // Generate town
         var buildingCount = random.NextInt(minBuildings, maxBuildings);
@@ -96,7 +122,7 @@ public class WorldManager : MonoBehaviour
             Spawn(
                 buildings[idx], 
                 new(buildingPos.x, 0, buildingPos.y), 
-                buildings[idx].transform.rotation * randangle
+                buildings[idx].prefab.transform.rotation * randangle
             );
         }
 
@@ -115,8 +141,8 @@ public class WorldManager : MonoBehaviour
 
         while(objectCount < objectTarget && attempts++ < 100_000)
         {
-            // Occasionally check if we need to break
-            if (attempts % 20 == 0 && ShouldBreak())
+            // Check if we need to break
+            if (ShouldBreak())
             {
                 yield return null;
                 UpdateBreak();
@@ -130,7 +156,7 @@ public class WorldManager : MonoBehaviour
             var chance = noise.cnoise(pos + noiseOffset);
             var roll = random.NextFloat();
 
-            GameObject[] choices;
+            Spawnable[] choices;
 
             if (chance < 0 && roll < math.abs(chance))
             {
@@ -148,16 +174,25 @@ public class WorldManager : MonoBehaviour
             Spawn(
                 choices[idx],
                 new(pos.x, 0, pos.y),
-                choices[idx].transform.rotation * randangle
+                choices[idx].prefab.transform.rotation * randangle
             );
 
             objectCount++;
         }
+
+        activeGenerations--;
     }
 
-    private void Awake()
+    private void Start()
     {
         player = FindObjectOfType<PlayerController>();
+
+        foreach (var item in animals)
+            SetupPrefab(item.prefab);
+        foreach (var item in trees)
+            SetupPrefab(item.prefab);
+        foreach (var item in buildings)
+            SetupPrefab(item.prefab);
 
         if (Application.isEditor)
         {

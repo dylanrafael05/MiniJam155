@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 1225371678999886727}
   - component: {fileID: 2704304072328119396}
   - component: {fileID: 456530483923682450}
+  - component: {fileID: 2881922665276154748}
   - component: {fileID: 2108993229967865794}
   m_Layer: 0
   m_Name: smalltree
@@ -161,6 +162,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strengthContribution: 2
   itemName: No Name
+--- !u!145 &2881922665276154748
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894526292702585149}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 0
+  m_Damper: 0
+  m_MinDistance: 0
+  m_MaxDistance: 4
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 0
 --- !u!65 &2108993229967865794
 BoxCollider:
   m_ObjectHideFlags: 0

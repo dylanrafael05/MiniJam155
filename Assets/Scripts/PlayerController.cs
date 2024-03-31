@@ -32,10 +32,13 @@ public class PlayerController : MonoBehaviour
     float currentOmega;
     float currentZoomSpeed;
 
+    public Rigidbody Rigidbody => body;
+
     private void Awake()
     {
         nado = GetComponent<Tornado>();
         body = GetComponent<Rigidbody>();
+
         cameraOffset = camera.transform.position - transform.position;
         cameraRotation = camera.transform.rotation;
 
