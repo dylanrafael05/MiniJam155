@@ -32,7 +32,7 @@ public class TornadoForce : MonoBehaviour
     TrackedCondition lifted;
     Transform originalParent;
 
-    public bool Grounded => grounded;
+    public TrackedCondition Lifted => lifted;
 
     // Start is called before the first frame update
     void Start()

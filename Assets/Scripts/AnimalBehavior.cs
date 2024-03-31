@@ -17,7 +17,6 @@ public class AnimalBehavior : MonoBehaviour
     private TornadoForce tornadoForce;
     private Tornado tornado;
     [SerializeField] private bool dead = false;
-    private bool touchedGround = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +32,7 @@ public class AnimalBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (tornadoForce.Grounded) touchedGround = true;
-        if (!tornadoForce.Grounded && touchedGround)
+        if (tornadoForce.Lifted.Value)
         {
             walkCycle.EndWalkCycle();
             dead = true;
@@ -51,7 +49,6 @@ public class AnimalBehavior : MonoBehaviour
                 direction.y = 0;
                 transform.parent.rotation = Quaternion.LookRotation(direction, Vector3.up);
                 transform.parent.eulerAngles = new Vector3(-90, transform.parent.eulerAngles.y, transform.parent.eulerAngles.z);
-                print("aaaaaa");
             }
             else
             {  
