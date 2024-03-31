@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -53,33 +54,48 @@ public class TornadoForce : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 position2D = new Vector2(transform.position.x, transform.position.z);
-        Vector2 tornadoPosition2D = new Vector2(tornado.transform.position.x, tornado.transform.position.z);
-        if (Vector2.Distance(position2D, tornadoPosition2D) <= maxPullDistance * tornado.strength) 
-        {
-            float distance = Vector3.Distance(transform.position, tornado.transform.position);
-            Vector3 direction = tornado.transform.position - transform.position;
-            direction.y += 3 * tornado.strength;
-            direction = direction.normalized;
-            float magnitude = (tornado.strength * strengthToForceRatio) / Mathf.Pow(distance, distanceFalloffPower);
-            if (magnitude > maxPullForce) magnitude = maxPullForce;
-            rb.AddForce(direction * magnitude);
-            // print(direction * magnitude);
+        var maxPull = tornado.maxPullDistance * tornado.EffectiveStrength;
 
-            Vector2 perpendicularDirection2D = Vector2.Perpendicular((tornadoPosition2D - position2D).normalized);
-            Vector3 perpendicularDirection = new Vector3(perpendicularDirection2D.x, 0, perpendicularDirection2D.y);
-            perpendicularDirection *= -1;
-            float perpendicularMagnitude = ((tornado.strength * strengthToForceRatio) / Mathf.Pow(distance, perpendicularDistanceFalloffPower)) * perpendicularForceMultiplier;
-            if (perpendicularMagnitude > maxPullForce) perpendicularMagnitude = maxPullForce;
-            rb.AddForce(perpendicularDirection * perpendicularMagnitude);
+        if (math.distance(tornado.transform.position.x, transform.position.x) > maxPull
+        || math.distance(tornado.transform.position.z, transform.position.z) > maxPull)
+        {
+            return;
         }
 
+        if (tornado.EffectiveStrength > rb.mass)
+        {
+            Vector2 position2D = new Vector2(transform.position.x, transform.position.z);
+            Vector2 tornadoPosition2D = new Vector2(tornado.transform.position.x, tornado.transform.position.z);
+
+            if (Vector2.Distance(position2D, tornadoPosition2D) <= maxPull)
+            {
+                float distance = Vector3.Distance(transform.position, tornado.transform.position);
+                Vector3 direction = tornado.transform.position - transform.position;
+                direction.y += 3 * tornado.EffectiveStrength;
+                direction = direction.normalized;
+                float magnitude = (tornado.EffectiveStrength * strengthToForceRatio) / Mathf.Pow(distance, distanceFalloffPower);
+                if (magnitude > maxPullForce) magnitude = maxPullForce;
+                rb.AddForce(direction * magnitude);
+                // print(direction * magnitude);
+
+                Vector2 perpendicularDirection2D = Vector2.Perpendicular((tornadoPosition2D - position2D).normalized);
+                Vector3 perpendicularDirection = new Vector3(perpendicularDirection2D.x, 0, perpendicularDirection2D.y);
+                perpendicularDirection *= -1;
+                float perpendicularMagnitude = ((tornado.EffectiveStrength * strengthToForceRatio) / Mathf.Pow(distance, perpendicularDistanceFalloffPower)) * perpendicularForceMultiplier;
+                if (perpendicularMagnitude > maxPullForce) perpendicularMagnitude = maxPullForce;
+                rb.AddForce(perpendicularDirection * perpendicularMagnitude);
+            }
+        }
+    }
+
+    void Update()
+    {
         // Handle lifting
         var delta = transform.position - tornado.transform.position;
         delta -= Vector3.up * delta.y;
 
         lifted.Value = (timeHitGround > Time.time - groundCheckTime || !grounded) 
-                    && delta.magnitude < tornado.influenceRadius * tornado.strength;
+                    && delta.magnitude < tornado.influenceRadius * tornado.EffectiveStrength;
 
         if(lifted.Rising)
         {
@@ -90,7 +106,7 @@ public class TornadoForce : MonoBehaviour
             spring.connectedBody = tornado.Rigidbody;
             spring.connectedMassScale = 0;
             spring.autoConfigureConnectedAnchor = false;
-            spring.connectedAnchor = -Vector3.forward * (tornado.strength * 10 + 5);
+            spring.connectedAnchor = -Vector3.forward * (tornado.EffectiveStrength * 10 + 5);
             spring.minDistance = 0;
             spring.maxDistance = 4;
             spring.damper = 0.5f;
@@ -118,11 +134,5 @@ public class TornadoForce : MonoBehaviour
         {
             grounded = false;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
