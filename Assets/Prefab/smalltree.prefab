@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5174094886712581197}
   - component: {fileID: 6243318220420244054}
   - component: {fileID: 283053745706422759}
-  - component: {fileID: 298748466170304039}
   m_Layer: 0
   m_Name: Cone.001
   m_TagString: Untagged
@@ -84,28 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &298748466170304039
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288222028328638703}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6195245291975648998, guid: 82a64cd1ed231644bbca186b579b2e95, type: 3}
 --- !u!1 &1894526292702585149
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +95,7 @@ GameObject:
   - component: {fileID: 2704304072328119396}
   - component: {fileID: 456530483923682450}
   - component: {fileID: 2881922665276154748}
+  - component: {fileID: 2108993229967865794}
   m_Layer: 0
   m_Name: smalltree
   m_TagString: Untagged
@@ -208,6 +186,27 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 0
+--- !u!65 &2108993229967865794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894526292702585149}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.549095, y: 13.185755, z: 7.9005165}
+  m_Center: {x: -0.015973568, y: 2.2452383, z: 0.031949997}
 --- !u!1 &2608419712961008236
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +218,6 @@ GameObject:
   - component: {fileID: 5382199559816922717}
   - component: {fileID: 6697892657837614121}
   - component: {fileID: 8464594438188985011}
-  - component: {fileID: 7224444463694296588}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -292,28 +290,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7224444463694296588
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2608419712961008236}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: 82a64cd1ed231644bbca186b579b2e95, type: 3}
 --- !u!1 &7754420849401572385
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +301,6 @@ GameObject:
   - component: {fileID: 324447203114187660}
   - component: {fileID: 2401014686458347120}
   - component: {fileID: 2490301956805501}
-  - component: {fileID: 8216722484007395856}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -398,25 +373,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8216722484007395856
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7754420849401572385}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3613567641014311022, guid: 82a64cd1ed231644bbca186b579b2e95, type: 3}

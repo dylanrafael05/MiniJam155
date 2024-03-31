@@ -776,6 +776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ringPrefab: {fileID: 5378570250064378250, guid: 92f4d79aad6c101458995a051f0ad325, type: 3}
+  explosionPrefab: {fileID: -1071140016866044096, guid: df2a076e8bee42544b21507c3c0efc28, type: 3}
   ringCount: 8
   strengthBar: {fileID: 359156372}
   barLevels:
@@ -794,6 +795,7 @@ MonoBehaviour:
   strength: 1
   strengthLoss: 0
   groundCheckTime: 0.5
+  timeBeforeExplosion: 10
   strengthToForceRatio: 2000
   maxPullDistance: 40
   maxPullForce: 300
