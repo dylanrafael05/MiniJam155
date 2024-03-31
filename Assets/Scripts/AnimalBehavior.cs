@@ -15,6 +15,7 @@ public class AnimalBehavior : MonoBehaviour
     private WalkCycle walkCycle;
     private Rigidbody parentRb;
     private TornadoForce tornadoForce;
+    private Tornado tornado;
     [SerializeField] private bool dead = false;
     private bool touchedGround = false;
 
@@ -24,6 +25,7 @@ public class AnimalBehavior : MonoBehaviour
         walkCycle = GetComponent<WalkCycle>();
         parentRb = GetComponentInParent<Rigidbody>();
         tornadoForce = GetComponentInParent<TornadoForce>();
+        tornado = FindAnyObjectByType<Tornado>();
         walkCycle.StartWalkCycle();
         parentRb.freezeRotation = true;
         direction = Random.Range(0, 2) == 1 ? 1 : -1;
@@ -40,10 +42,22 @@ public class AnimalBehavior : MonoBehaviour
         }
         else if (!dead)
         {
-            if (Random.Range(0f, 1f) <= turnSwitchChance) direction *= -1;
             if (!walkCycle.Walking) walkCycle.StartWalkCycle();
+            Vector2 position2D = new Vector2(transform.position.x, transform.position.z);
+            Vector2 tornadoPosition2D = new Vector2(tornado.transform.position.x, tornado.transform.position.z);
+            if (Vector2.Distance(position2D, tornadoPosition2D) <= scareDistance * tornado.strength)
+            {
+                Vector3 direction = transform.position - tornado.transform.position;
+                direction.y = 0;
+                transform.parent.rotation = Quaternion.LookRotation(direction, Vector3.up);
+                transform.parent.eulerAngles = new Vector3(-90, transform.parent.eulerAngles.y, transform.parent.eulerAngles.z);
+                print("aaaaaa");
+            }
+            else
+            {  
+                transform.parent.eulerAngles += direction * rotationSpeed * Vector3.forward;
+            }
             transform.parent.position += -transform.parent.up.normalized * movementSpeed;
-            transform.parent.eulerAngles += direction * rotationSpeed * Vector3.forward;
         }
     }
 
