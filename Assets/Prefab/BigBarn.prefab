@@ -150,7 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthContribution: 30
+  strengthContribution: 4
+  strengthUnlock: 150
   itemName: No Name
 --- !u!145 &-6107378017497275827
 SpringJoint:

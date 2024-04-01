@@ -7,6 +7,7 @@ using UnityEngine;
 public class TornadoForce : MonoBehaviour
 {
     public float strengthContribution = 1;
+    public float strengthUnlock = 1;
     public string itemName = "No Name";
 
     [Header("Force Constants")]
@@ -70,7 +71,7 @@ public class TornadoForce : MonoBehaviour
             return;
         }
 
-        if (tornado.EffectiveStrength > strengthContribution)
+        if (tornado.strength > strengthUnlock)
         {
             Vector2 position2D = new Vector2(transform.position.x, transform.position.z);
             Vector2 tornadoPosition2D = new Vector2(tornado.transform.position.x, tornado.transform.position.z);
@@ -98,8 +99,10 @@ public class TornadoForce : MonoBehaviour
         var delta = transform.position - tornado.transform.position;
         delta -= Vector3.up * delta.y;
 
-        lifted.Value = settled && (timeHitGround > Time.time - groundCheckTime || !grounded)
-                    && delta.magnitude < tornado.influenceRadius * tornado.EffectiveStrength;
+        lifted.Value = settled 
+                    && (timeHitGround > Time.time - groundCheckTime || !grounded)
+                    && delta.magnitude < tornado.influenceRadius * tornado.EffectiveStrength
+                    && tornado.strength > strengthUnlock;
 
         if (lifted.Rising)
         {

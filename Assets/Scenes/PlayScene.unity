@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657755, g: 0.4964127, b: 0.57481825, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -786,15 +786,15 @@ MonoBehaviour:
   - maximumValue: 0.5
     barColor: {r: 0, g: 0, b: 0, a: 0}
   - maximumValue: 1
-    barColor: {r: 0.6398647, g: 0.82810587, b: 0.8415094, a: 1}
-  - maximumValue: 8
-    barColor: {r: 0.6392157, g: 0.84313726, b: 0.7310748, a: 1}
-  - maximumValue: 32
-    barColor: {r: 0.64406323, g: 0.84313726, b: 0.6392157, a: 1}
-  - maximumValue: 128
-    barColor: {r: 0.7714906, g: 0.84313726, b: 0.6392157, a: 1}
-  - maximumValue: 1024
-    barColor: {r: 0.90292746, g: 0.93207544, b: 0.39920965, a: 1}
+    barColor: {r: 0.6, g: 0.7006109, b: 0.74509805, a: 1}
+  - maximumValue: 20
+    barColor: {r: 0.60500526, g: 0.7509433, b: 0.61623126, a: 1}
+  - maximumValue: 150
+    barColor: {r: 0.80780756, g: 0.8792453, b: 0.50266284, a: 1}
+  - maximumValue: 300
+    barColor: {r: 0.9098039, g: 0.8487766, b: 0.5058824, a: 1}
+  - maximumValue: 2000
+    barColor: {r: 0.96981126, g: 0.7830607, b: 0.3348593, a: 1}
   strength: 5
   strengthLoss: 0.25
   groundCheckTime: 0.5

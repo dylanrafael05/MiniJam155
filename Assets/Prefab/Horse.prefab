@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strengthContribution: 1
+  strengthUnlock: 0
   itemName: No Name
 --- !u!54 &3026795984833882000
 Rigidbody:

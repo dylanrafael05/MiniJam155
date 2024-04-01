@@ -2,8 +2,18 @@
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
+    static DontDestroyOnLoad instance;
+
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        if(!instance)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 }

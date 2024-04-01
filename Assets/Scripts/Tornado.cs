@@ -125,7 +125,7 @@ public class Tornado : MonoBehaviour
             }
         }
 
-        if (targetStrength <= 1f)
+        if (strength <= 1.1f)
         {
             strength = 0;
             dying = true;

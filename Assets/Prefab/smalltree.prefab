@@ -129,7 +129,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894526292702585149}
   serializedVersion: 4
-  m_Mass: 3
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -205,7 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthContribution: 5
+  strengthContribution: 1
+  strengthUnlock: 20
   itemName: No Name
 --- !u!1 &2608419712961008236
 GameObject:

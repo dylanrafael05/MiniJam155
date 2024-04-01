@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strengthContribution: 1
+  strengthUnlock: 0
   itemName: No Name
 --- !u!136 &2104493174867978550
 CapsuleCollider:
