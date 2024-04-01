@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody), typeof(Tornado))]
 public class PlayerController : MonoBehaviour
@@ -53,8 +55,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        StartCoroutine(ZoomOut());
+    }
+    private IEnumerator ZoomOut()
+    {
+        yield return new WaitForSeconds(1.0f);
+        for (int i = 1; i <= 20; i++)
+        {
+            camera.transform.eulerAngles = new Vector3(20 - i, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z);
+            yield return null;
+        }
+        for (int i = 0; i < 200; i++)
+        {
+            camera.transform.position += Vector3.up * 10;
+            yield return new WaitForSeconds(0.01f);
+        }
+        SceneManager.LoadScene(0);
+    }
+ 
     private void Update()
     {
+        if (nado.Dying) return;
+
         // Handle mouse movement
         var mouseDelta = Input.GetAxis("Mouse X");
         var newOmega = rotationSpeed * mouseDelta;

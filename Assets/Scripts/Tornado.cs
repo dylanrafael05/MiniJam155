@@ -24,6 +24,7 @@ public class Tornado : MonoBehaviour
     public float strengthLoss;
     public float groundCheckTime;
     public float timeBeforeExplosion;
+    private bool dying = false;
 
     [Header("Force Constants")]
     public float strengthToForceRatio;
@@ -44,6 +45,7 @@ public class Tornado : MonoBehaviour
     public float ObjectContributions { get; set; }
 
     public float EffectiveStrength => Mathf.Log(1 + strength) / Mathf.Log(2);
+    public bool Dying => dying;
 
     // Start is called before the first frame update
     void Start()
@@ -67,8 +69,22 @@ public class Tornado : MonoBehaviour
         }
     }
 
+    private void Die()
+    {
+        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.enabled = false;
+        }
+        strengthBar.gameObject.SetActive(false);
+        GetComponent<ParticleSystem>().Play();
+        GetComponent<PlayerController>().Die();
+    }
+
     private void Update()
     {
+        if (dying) return;
+
         targetStrength = BaseStrength + ObjectContributions - PenaltyContributions;
         targetStrength = Mathf.Max(0.5f, targetStrength);
 
@@ -107,6 +123,13 @@ public class Tornado : MonoBehaviour
 
                 break;
             }
+        }
+
+        if (targetStrength <= 1f)
+        {
+            strength = 0;
+            dying = true;
+            Die();
         }
     }
 }
