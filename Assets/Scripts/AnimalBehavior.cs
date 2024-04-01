@@ -11,6 +11,9 @@ public class AnimalBehavior : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
     public float turnSwitchChance;
+    public float speakChance;
+    public AudioClip sound;
+    private AudioSource audioSource;
     private int direction;
     private WalkCycle walkCycle;
     private Rigidbody parentRb;
@@ -25,6 +28,7 @@ public class AnimalBehavior : MonoBehaviour
         parentRb = GetComponentInParent<Rigidbody>();
         tornadoForce = GetComponentInParent<TornadoForce>();
         tornado = FindAnyObjectByType<Tornado>();
+        audioSource = GetComponent<AudioSource>();
         walkCycle.StartWalkCycle();
         parentRb.freezeRotation = true;
         direction = Random.Range(0, 2) == 1 ? 1 : -1;
@@ -56,6 +60,7 @@ public class AnimalBehavior : MonoBehaviour
             }
             transform.parent.position += -transform.parent.up.normalized * movementSpeed;
         }
+        if (Random.Range(0f, 1f) <= speakChance) audioSource.PlayOneShot(sound);
     }
 
     // Update is called once per frame
