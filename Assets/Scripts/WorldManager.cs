@@ -10,6 +10,8 @@ using SeededRandom = Unity.Mathematics.Random;
 
 public class WorldManager : MonoBehaviour
 {
+    public static WorldManager Instance { get; private set; }
+
     [Serializable]
     public struct Spawnable
     {
@@ -41,6 +43,8 @@ public class WorldManager : MonoBehaviour
 
     public Dictionary<int2, GameObject> GeneratedChunks = new();
     int2 oldPlayerChunk;
+
+    public Rigidbody Rigidbody { get; set; }
 
     public void SetupPrefab(GameObject gameObject)
     {
@@ -81,7 +85,7 @@ public class WorldManager : MonoBehaviour
 
         bool ShouldBreak()
         {
-            const float MAX_TIME = 8f / 1000;
+            const float MAX_TIME = 2f / 1000;
 
             return time < Time.realtimeSinceStartup - MAX_TIME / activeGenerations;
         }
@@ -102,7 +106,7 @@ public class WorldManager : MonoBehaviour
 
         var townPos = random.NextFloat2(center - chunkSize / 2 + townSize, center + chunkSize / 2 - townSize);
 
-        for(int i = 0; i < buildings.Length; i++)
+        for(int i = 0; i < buildingCount; i++)
         {
             var x = i % townRowSize;
             var y = i / townRowSize;
@@ -115,13 +119,13 @@ public class WorldManager : MonoBehaviour
             var idx = random.NextInt(buildings.Length);
 
             var randOffset = random.NextFloat2(-buildingSpacing / 4, buildingSpacing / 4);
-            var randangle = Quaternion.AngleAxis(random.NextFloat(math.PI * 2), Vector3.up);
+            var randangle = Quaternion.AngleAxis(random.NextFloat(360), Vector3.up);
 
             buildingPos += randOffset;
 
             Spawn(
                 buildings[idx], 
-                new(buildingPos.x, 0, buildingPos.y), 
+                new(buildingPos.x, 0, buildingPos.y),
                 buildings[idx].prefab.transform.rotation * randangle
             );
         }
@@ -169,7 +173,7 @@ public class WorldManager : MonoBehaviour
             else continue;
 
             var idx = random.NextInt(choices.Length);
-            var randangle = Quaternion.AngleAxis(random.NextFloat(math.PI * 2), Vector3.up);
+            var randangle = Quaternion.AngleAxis(random.NextFloat(360), Vector3.up);
 
             Spawn(
                 choices[idx],
@@ -181,6 +185,12 @@ public class WorldManager : MonoBehaviour
         }
 
         activeGenerations--;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+        Rigidbody = GetComponentInChildren<Rigidbody>();
     }
 
     private void Start()
@@ -210,7 +220,7 @@ public class WorldManager : MonoBehaviour
     public void UpdateChunks()
     {
         // TODO: fix this being incorrect!
-        var playerChunk = (int2)(((float3)player.transform.position).xz / chunkSize + 0.5f);
+        var playerChunk = (int2)(((float3)player.transform.position).xz / chunkSize);
 
         for(int i = -1; i <= 1; i++)
         {

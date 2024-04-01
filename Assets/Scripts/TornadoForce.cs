@@ -65,7 +65,7 @@ public class TornadoForce : MonoBehaviour
         var maxPull = maxPullDistance * tornado.EffectiveStrength;
 
         if (math.distance(tornado.transform.position.x, transform.position.x) > maxPull
-        || math.distance(tornado.transform.position.z, transform.position.z) > maxPull)
+         || math.distance(tornado.transform.position.z, transform.position.z) > maxPull)
         {
             return;
         }
@@ -94,32 +94,38 @@ public class TornadoForce : MonoBehaviour
             }
         }
 
-        spring.connectedAnchor = -Vector3.forward * (tornado.EffectiveStrength * 10 + 5);
-
         // Handle lifting
         var delta = transform.position - tornado.transform.position;
         delta -= Vector3.up * delta.y;
 
-        lifted.Value = settled && (timeHitGround > Time.time - groundCheckTime || !grounded) 
+        lifted.Value = settled && (timeHitGround > Time.time - groundCheckTime || !grounded)
                     && delta.magnitude < tornado.influenceRadius * tornado.EffectiveStrength;
 
-        if(lifted.Rising)
+        if (lifted.Rising)
         {
             tornado.ObjectContributions += strengthContribution;
             transform.SetParent(tornado.transform);
 
-            spring.connectedBody = tornado.Rigidbody;
+            spring.connectedBody = WorldManager.Instance.Rigidbody;
+            spring.connectedMassScale = 0;
+            spring.minDistance = 0;
+            spring.maxDistance = 4;
 
-            spring.spring = 1;
+            spring.spring = 3;
             StartCoroutine(Explode());
         }
-        else if(lifted.Falling)
+        else if (lifted.Falling)
         {
             tornado.ObjectContributions -= strengthContribution;
             transform.SetParent(originalParent);
 
             spring.connectedBody = null;
             spring.spring = 0;
+        }
+
+        if (lifted.Value)
+        {
+            spring.connectedAnchor = tornado.transform.position + Vector3.up * (tornado.EffectiveStrength * 10);
         }
     }
 
