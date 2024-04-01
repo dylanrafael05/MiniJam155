@@ -13,7 +13,7 @@ public class DontDestroyOnLoad : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
