@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 862795074218407505}
   - component: {fileID: 8498856840510384826}
   - component: {fileID: 7716897624590615823}
+  - component: {fileID: 4987174882316947357}
   m_Layer: 0
   m_Name: mediumtree
   m_TagString: Untagged
@@ -546,7 +547,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8707699113921921812}
   serializedVersion: 4
-  m_Mass: 30
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -577,8 +578,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthContribution: 3
+  strengthContribution: 4
   itemName: No Name
+--- !u!65 &7716897624590615823
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707699113921921812}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14.06234, y: 23.361898, z: 13.814468}
+  m_Center: {x: -2.212469, y: 1.4176626, z: 0.58428955}
 --- !u!145 &4987174882316947357
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -603,24 +625,3 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 0
---- !u!65 &7716897624590615823
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8707699113921921812}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 14.06234, y: 23.361898, z: 13.814468}
-  m_Center: {x: -2.212469, y: 1.4176626, z: 0.58428955}

@@ -70,7 +70,7 @@ public class TornadoForce : MonoBehaviour
             return;
         }
 
-        if (tornado.EffectiveStrength > rb.mass)
+        if (tornado.EffectiveStrength > strengthContribution)
         {
             Vector2 position2D = new Vector2(transform.position.x, transform.position.z);
             Vector2 tornadoPosition2D = new Vector2(tornado.transform.position.x, tornado.transform.position.z);

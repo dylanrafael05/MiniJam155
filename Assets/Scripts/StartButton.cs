@@ -6,20 +6,11 @@ using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour
 {
+    public Fade fader;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Button>().onClick.AddListener(() => { Play(); });
-    }
-
-    public void Play()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<Button>().onClick.AddListener(fader.FadeToPlayscene);
     }
 }

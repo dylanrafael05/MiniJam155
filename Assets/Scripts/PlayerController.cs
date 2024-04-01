@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         var currentSpeed = body.velocity.magnitude;
         if (currentSpeed > maxMoveSpeed * nado.EffectiveStrength)
         {
-            body.velocity *= maxMoveSpeed / currentSpeed;
+            body.velocity *= maxMoveSpeed * nado.EffectiveStrength / currentSpeed;
         }
 
         // Rotate camera
