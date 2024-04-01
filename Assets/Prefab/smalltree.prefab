@@ -93,9 +93,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1225371678999886727}
   - component: {fileID: 2704304072328119396}
-  - component: {fileID: 456530483923682450}
   - component: {fileID: 2881922665276154748}
   - component: {fileID: 2108993229967865794}
+  - component: {fileID: 2768875964401804140}
   m_Layer: 0
   m_Name: smalltree
   m_TagString: Untagged
@@ -148,20 +148,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &456530483923682450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894526292702585149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strengthContribution: 2
-  itemName: No Name
 --- !u!145 &2881922665276154748
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -207,6 +193,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.549095, y: 13.185755, z: 7.9005165}
   m_Center: {x: -0.015973568, y: 2.2452383, z: 0.031949997}
+--- !u!114 &2768875964401804140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894526292702585149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85192a73798e26a4fafc6b750f499ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strengthContribution: 5
+  itemName: No Name
 --- !u!1 &2608419712961008236
 GameObject:
   m_ObjectHideFlags: 0

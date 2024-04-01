@@ -101,8 +101,6 @@ public class TornadoForce : MonoBehaviour
         lifted.Value = settled && (timeHitGround > Time.time - groundCheckTime || !grounded)
                     && delta.magnitude < tornado.influenceRadius * tornado.EffectiveStrength;
 
-        Debug.Log($"settled = {settled}, grounded = {grounded}");
-
         if (lifted.Rising)
         {
             tornado.ObjectContributions += strengthContribution;
@@ -110,8 +108,10 @@ public class TornadoForce : MonoBehaviour
 
             spring.connectedBody = WorldManager.Instance.Rigidbody;
             spring.connectedMassScale = 0;
+            spring.minDistance = 0;
+            spring.maxDistance = 4;
 
-            spring.spring = 1;
+            spring.spring = 3;
             StartCoroutine(Explode());
         }
         else if (lifted.Falling)
@@ -125,7 +125,7 @@ public class TornadoForce : MonoBehaviour
 
         if (lifted.Value)
         {
-            spring.connectedAnchor = tornado.transform.position - Vector3.forward * (tornado.EffectiveStrength * 10 + 5);
+            spring.connectedAnchor = tornado.transform.position + Vector3.up * (tornado.EffectiveStrength * 10);
         }
     }
 
@@ -144,19 +144,8 @@ public class TornadoForce : MonoBehaviour
     {
         if (collision.gameObject.layer == Layers.Ground)
         {
-            Debug.Log("!!!!");
-
             timeHitGround = Time.time;
             grounded = true;
-            settled = true;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.layer == Layers.Ground)
-        {
-            Debug.Log("!!!!");
             settled = true;
         }
     }

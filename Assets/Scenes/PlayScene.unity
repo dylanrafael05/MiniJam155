@@ -296,6 +296,65 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549029007}
   m_Mesh: {fileID: 3613567641014311022, guid: 32860db7a97162d489f505f7cf66b7de, type: 3}
+--- !u!1 &692009531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692009532}
+  - component: {fileID: 692009533}
+  m_Layer: 0
+  m_Name: Rigidbody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692009532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692009531}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2125997552}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &692009533
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692009531}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &783952562
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +721,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2125997552}
   - component: {fileID: 2125997553}
-  - component: {fileID: 2125997554}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -682,7 +740,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 692009532}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2125997553
@@ -703,8 +762,8 @@ MonoBehaviour:
   minBuildings: 5
   maxBuildings: 10
   buildingSpacing: 25
-  minObjects: 75
-  maxObjects: 150
+  minObjects: 100
+  maxObjects: 200
   ground:
     prefab: {fileID: 5063901535567278280, guid: f8c8b04c9b406a14ab6589b28867730f, type: 3}
     verticalOffset: 0
@@ -717,9 +776,9 @@ MonoBehaviour:
   - prefab: {fileID: 1894526292702585149, guid: 69ee2e854095ac547b54490f7d06e287, type: 3}
     verticalOffset: 3
   - prefab: {fileID: 8707699113921921812, guid: bdb78ddcc7411b3439d9fd3b97993131, type: 3}
-    verticalOffset: 5
+    verticalOffset: 7
   - prefab: {fileID: 5726045333183058257, guid: cf11f645e8a3fb94fad8bca561e7f61c, type: 3}
-    verticalOffset: 8
+    verticalOffset: 10
   buildings:
   - prefab: {fileID: 6189205770738673451, guid: b4f20fbc1750b7c45aeda5a722671f3d, type: 3}
     verticalOffset: 4
@@ -728,34 +787,7 @@ MonoBehaviour:
   - prefab: {fileID: 5952251311424521820, guid: eb6659b1041d0e64f8db162ea261d9e5, type: 3}
     verticalOffset: 8
   - prefab: {fileID: 3671691219758668783, guid: 76554de15e197e2479bcc97d12aec00e, type: 3}
-    verticalOffset: 12
---- !u!54 &2125997554
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2125997551}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+    verticalOffset: 15
 --- !u!4 &129879841967350432
 Transform:
   m_ObjectHideFlags: 0

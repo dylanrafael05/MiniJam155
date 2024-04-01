@@ -187,9 +187,14 @@ public class WorldManager : MonoBehaviour
         activeGenerations--;
     }
 
+    private void Awake()
+    {
+        Instance = this;
+        Rigidbody = GetComponentInChildren<Rigidbody>();
+    }
+
     private void Start()
     {
-        Rigidbody = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerController>();
 
         foreach (var item in animals)
@@ -215,7 +220,7 @@ public class WorldManager : MonoBehaviour
     public void UpdateChunks()
     {
         // TODO: fix this being incorrect!
-        var playerChunk = (int2)(((float3)player.transform.position).xz / chunkSize + 0.5f);
+        var playerChunk = (int2)(((float3)player.transform.position).xz / chunkSize);
 
         for(int i = -1; i <= 1; i++)
         {
