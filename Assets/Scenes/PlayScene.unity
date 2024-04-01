@@ -701,7 +701,7 @@ MonoBehaviour:
     y: 500
   minBuildings: 5
   maxBuildings: 10
-  buildingSpacing: 12
+  buildingSpacing: 20
   minObjects: 75
   maxObjects: 150
   ground:
