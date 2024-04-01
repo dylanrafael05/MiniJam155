@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     Tornado nado;
 
     Vector3 cameraOffset;
+    float baseField;
     Quaternion cameraRotation;
     float angle;
 
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         cameraRotation = camera.transform.rotation;
 
         angle = 0;
+        baseField = cameraOffset.magnitude;
     }
 
     private void OnApplicationFocus(bool focus)
@@ -161,6 +163,7 @@ public class PlayerController : MonoBehaviour
             transform.position + quat * cameraOffset * nado.EffectiveStrength, 
             quat * cameraRotation
         );
+        camera.farClipPlane = 300 * Mathf.Pow(cameraOffset.magnitude * nado.EffectiveStrength / baseField, 0.4f);
     }
 
 
